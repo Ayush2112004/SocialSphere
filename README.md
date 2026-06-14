@@ -1,6 +1,16 @@
 <div align="center">
-  <h1>SocialSphere</h1>
-  <p>A full-stack social media application built as part of an Internship Assignment.</p>
+  <!-- You can add a logo image here if you have one -->
+  <!-- <img src="client/public/logo.png" alt="SocialSphere Logo" width="120" /> -->
+  <h1>🌐 SocialSphere</h1>
+  <p><strong>A Modern, Full-Stack Social Networking Application</strong></p>
+
+  <p>
+    <a href="#features">Features</a> •
+    <a href="#tech-stack">Tech Stack</a> •
+    <a href="#getting-started">Getting Started</a> •
+    <a href="#api-reference">API Reference</a> •
+    <a href="#architecture--folder-structure">Architecture</a>
+  </p>
 
   <div>
     <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
@@ -17,146 +27,180 @@
 
 ## 📖 Overview
 
-**SocialSphere** is a modern, responsive, and fully-featured social networking platform. It allows users to connect, share moments, comment on posts, and interact seamlessly. This project was developed as a comprehensive internship assignment, emphasizing best practices in full-stack web development, user authentication, and RESTful API architecture.
+**SocialSphere** is a feature-rich, responsive social media platform built using the MERN stack. Designed with user experience in mind, it provides a seamless interface for users to connect, share their thoughts, upload images, and interact with others in real-time. This project serves as a comprehensive internship assignment, showcasing expertise in modern web development, secure authentication, and robust RESTful API design.
 
 ## ✨ Features
 
-- **User Authentication**: Secure signup and login using JSON Web Tokens (JWT) and bcrypt password hashing.
-- **Post Management**: Users can create, view, edit, and delete their own posts.
-- **Interactive Feed**: A dynamic timeline where users can like and comment on posts.
-- **Image Uploads**: Integrated local image upload capability using Multer.
-- **Real-Time Notifications**: Stay updated with the latest interactions.
-- **Responsive Design**: A sleek and modern UI built with React and Material UI, fully responsive across desktop and mobile devices.
+- 🔐 **Robust Authentication & Security**
+  - Secure sign-up and login workflows.
+  - JWT-based authentication for secure session management.
+  - Password hashing using `bcryptjs`.
+- ✍️ **Post & Content Management**
+  - Create posts with rich text and emojis.
+  - Seamless image uploads managed via `multer`.
+  - Edit and delete your own posts easily.
+- 💬 **Interactive User Engagement**
+  - Real-time like and unlike functionality.
+  - Nested commenting system on posts.
+  - Dynamic user feeds displaying the latest content.
+- 🔔 **Activity Notifications**
+  - Receive alerts for likes, comments, and interactions to stay connected.
+- 📱 **Modern & Responsive UI**
+  - Sleek Material UI (MUI) component design.
+  - Fully responsive layout ensuring a great experience on desktop, tablet, and mobile.
+  - Interactive toast notifications via `react-toastify`.
 
-## 🛠️ Technology Stack
+## 🛠️ Tech Stack
 
-### Frontend (Client)
-- **Framework**: [React 19](https://react.dev/) via [Vite](https://vitejs.dev/)
-- **Styling**: [Material UI (MUI)](https://mui.com/)
-- **Routing**: [React Router DOM](https://reactrouter.com/)
-- **HTTP Client**: [Axios](https://axios-http.com/)
-- **Other Tools**: Emoji Picker React, Moment.js, React Toastify
-
-### Backend (Server)
-- **Environment**: [Node.js](https://nodejs.org/)
-- **Framework**: [Express.js](https://expressjs.com/)
-- **Database**: [MongoDB](https://www.mongodb.com/) & [Mongoose](https://mongoosejs.com/)
-- **Authentication**: [JWT](https://jwt.io/) & [Bcryptjs](https://www.npmjs.com/package/bcryptjs)
-- **File Uploads**: [Multer](https://www.npmjs.com/package/multer)
-
----
+| Category | Technologies |
+| :--- | :--- |
+| **Frontend Core** | React 19, Vite, React Router DOM v7 |
+| **Styling & UI** | Material UI (MUI), Emotion |
+| **Backend Core** | Node.js, Express.js |
+| **Database** | MongoDB, Mongoose |
+| **Authentication** | JSON Web Tokens (JWT), bcryptjs |
+| **Utilities** | Axios, Multer (File Uploads), Moment.js, Emoji Picker React |
 
 ## 🚀 Getting Started
 
-Follow these instructions to set up the project locally on your machine.
+Follow these steps to set up the project locally for development and testing.
 
 ### Prerequisites
 
-- **Node.js**: Ensure you have Node.js installed (v16+ recommended).
-- **MongoDB**: Have a local MongoDB server running or a MongoDB Atlas connection string.
+Ensure your system meets the following requirements:
+- **Node.js**: `v16.0.0` or higher recommended.
+- **MongoDB**: Local MongoDB instance running or an Atlas connection string.
+- **Git**: For version control.
 
-### Installation
+### Installation & Setup
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/Ayush2112004/SocialSphere.git
    cd SocialSphere
    ```
 
-2. **Install Server Dependencies:**
+2. **Install Dependencies:**
+   Install dependencies for both the backend and frontend:
    ```bash
+   # Install server dependencies
    cd server
    npm install
-   ```
 
-3. **Install Client Dependencies:**
-   ```bash
+   # Install client dependencies
    cd ../client
    npm install
    ```
 
-### ⚙️ Environment Variables Setup
+### ⚙️ Environment Variables
 
-You need to create `.env` files in both the `client` and `server` directories to run the application locally. We use `.env` files to keep sensitive information secure and configurable per environment.
+Secure your application by creating `.env` files in both the `server` and `client` directories based on the required configurations.
 
-#### Server-side Environment Variables
-
-Create a `.env` file in the `server` directory (`server/.env`) and add the following keys:
-
+#### Server (`server/.env`)
 ```env
-# The port on which the Express server will run
+# Application Port
 PORT=5000
 
-# Your MongoDB connection string (local or Atlas)
+# MongoDB Connection String
 MONGODB_URI=mongodb://127.0.0.1:27017/socialsphere_db
 
-# A secret key used to sign and verify JSON Web Tokens (JWT)
+# JWT Secret for Authentication
 JWT_SECRET=your_super_secret_jwt_key_here
 ```
 
-*Note: Ensure `MONGODB_URI` points to a valid MongoDB instance. The `JWT_SECRET` can be any strong, random string.*
-
-#### Client-side Environment Variables
-
-Create a `.env` file in the `client` directory (`client/.env`) and add the following key:
-
+#### Client (`client/.env`)
 ```env
-# The base URL for the backend API. Used by Axios to make requests.
+# Backend API Base URL
 VITE_API_URL=http://localhost:5000
 ```
 
 ### 🏃‍♂️ Running the Application
 
-1. **Start the Server:**
-   Open a terminal, navigate to the `server` directory, and run:
-   ```bash
-   npm run dev
-   ```
-   *The server should start on `http://localhost:5000`.*
+To run the application, you will need two separate terminal windows.
 
-2. **Start the Client:**
-   Open a new terminal, navigate to the `client` directory, and run:
-   ```bash
-   npm run dev
-   ```
-   *The React app should start and be accessible at `http://localhost:5173`.*
+**Terminal 1: Start the Backend Server**
+```bash
+cd server
+npm run dev
+```
+*The Express server will start on `http://localhost:5000`.*
+
+**Terminal 2: Start the Frontend Client**
+```bash
+cd client
+npm run dev
+```
+*The React app will launch on `http://localhost:5173`.*
 
 ---
 
-## 📂 Folder Structure
+## 🔌 API Reference
 
-```
+Here are some of the core API endpoints available in the backend:
+
+### Authentication (`/api/auth`)
+- `POST /register` - Register a new user.
+- `POST /login` - Authenticate a user and return a token.
+
+### Users (`/api/users`)
+- `GET /:id` - Get user profile.
+- `PUT /:id` - Update user profile.
+- `GET /suggested` - Get suggested users to follow.
+
+### Posts (`/api/posts`)
+- `GET /` - Fetch feed posts.
+- `POST /` - Create a new post.
+- `PUT /:id` - Update a post.
+- `DELETE /:id` - Delete a post.
+- `POST /:id/like` - Like/Unlike a post.
+
+### Comments (`/api/comments`)
+- `GET /:postId` - Get comments for a post.
+- `POST /:postId` - Add a comment to a post.
+
+---
+
+## 📂 Architecture & Folder Structure
+
+```text
 SocialSphere/
-├── client/                 # React Frontend
-│   ├── public/             # Static assets
-│   ├── src/
-│   │   ├── components/     # Reusable UI components
-│   │   ├── pages/          # Page level components
-│   │   ├── utils/          # Utility functions (e.g., Axios instance)
-│   │   ├── App.jsx         # Main application component
-│   │   └── main.jsx        # Entry point
-│   ├── package.json
-│   └── vite.config.js
-├── server/                 # Express Backend
-│   ├── controllers/        # Request handlers
-│   ├── middleware/         # Express middlewares (e.g., auth check)
-│   ├── models/             # Mongoose schemas
-│   ├── routes/             # API route definitions
-│   ├── uploads/            # Locally uploaded user files/images
-│   ├── index.js            # Main server entry point
-│   └── package.json
-└── README.md
+├── client/                     # React Frontend Application
+│   ├── public/                 # Static public assets (icons, logos)
+│   ├── src/                    
+│   │   ├── assets/             # Images and visual assets
+│   │   ├── components/         # Reusable UI components (Navbar, PostCard, etc.)
+│   │   ├── context/            # Global state management (Auth, Theme)
+│   │   ├── pages/              # Primary route views (Feed, Profile, Auth)
+│   │   ├── utils/              # Helper functions and Axios configuration
+│   │   ├── App.jsx             # Root component and Routing logic
+│   │   ├── index.css           # Global CSS variables and resets
+│   │   └── theme.js            # MUI custom theme configuration
+│   └── vite.config.js          # Vite bundler settings
+│
+├── server/                     # Node.js / Express Backend API
+│   ├── controllers/            # Business logic for route handling
+│   ├── middleware/             # Custom middleware (Auth validation, Multer)
+│   ├── models/                 # Mongoose database schemas
+│   ├── routes/                 # Express API endpoint definitions
+│   ├── uploads/                # Directory for local image storage
+│   └── index.js                # Server entry point and configuration
+│
+└── README.md                   # Project documentation
 ```
 
-## 📝 Design Decisions & Best Practices
+---
 
-- **Security**: Passwords are hashed before saving to the database using `bcryptjs`. API endpoints are protected using a custom authentication middleware verifying JWTs.
-- **Scalability**: The backend uses an MVC-inspired architecture, separating routes, controllers, and models to keep the codebase clean and maintainable.
-- **UX/UI**: Utilized Material UI components for a polished, consistent, and accessible design system right out of the box, supplemented by React Toastify for intuitive user feedback.
-- **CORS Handling**: Properly configured CORS to allow smooth communication between the distinct Vite frontend server and Express backend server.
+## 💡 Design Decisions & Best Practices
+
+- **Separation of Concerns**: The backend strictly follows the MVC (Model-View-Controller) architecture, ensuring clean, modular, and maintainable code.
+- **Component-Driven UI**: The frontend utilizes a highly modular component architecture, maximizing code reuse and simplifying testing.
+- **Scalable State Management**: Uses React Context API combined with custom hooks for lightweight, efficient state management.
+- **Error Handling**: Comprehensive error handling on both client (React Toastify alerts) and server (centralized error middleware).
 
 ---
 
 <div align="center">
-  <i>Developed with ❤️ for the Internship Assignment.</i>
+  <b>Developed by <a href="https://github.com/Ayush2112004">Ayush2112004</a></b>
+  <br />
+  <i>Built as a comprehensive Internship Assignment.</i>
 </div>
