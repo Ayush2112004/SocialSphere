@@ -2,7 +2,10 @@ const User = require('../models/User');
 
 exports.getUserProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.params.id).select('-password');
+    const user = await User.findById(req.params.id)
+      .populate('followers', 'username handle profilePicture hasBadge')
+      .populate('following', 'username handle profilePicture hasBadge')
+      .select('-password');
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
-import { Box, Typography, Avatar, Button, Tabs, Tab, CircularProgress, IconButton, LinearProgress } from '@mui/material';
+import { Box, Typography, Avatar, Button, Tabs, Tab, CircularProgress, IconButton, LinearProgress, Dialog, DialogTitle, DialogContent, List, ListItem, ListItemAvatar, ListItemText } from '@mui/material';
 import { useParams, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
 import api from '../utils/api';
@@ -7,6 +7,7 @@ import PostCard from '../components/PostCard';
 import ShareIcon from '@mui/icons-material/Share';
 import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutlined';
+import CloseIcon from '@mui/icons-material/Close';
 import moment from 'moment';
 
 const ProfilePage = () => {
@@ -17,6 +18,9 @@ const ProfilePage = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [tabValue, setTabValue] = useState(0);
+
+  const [networkModalOpen, setNetworkModalOpen] = useState(false);
+  const [networkModalType, setNetworkModalType] = useState('followers'); // 'followers' or 'following'
 
   const profilePicInputRef = useRef(null);
   const coverPhotoInputRef = useRef(null);
@@ -181,16 +185,66 @@ const ProfilePage = () => {
 
         {/* Followers */}
         <Box sx={{ display: 'flex', gap: 3, mt: 3, mb: 2 }}>
-          <Box textAlign="center">
+          <Box 
+            textAlign="center" 
+            sx={{ cursor: 'pointer', '&:hover': { opacity: 0.8 } }}
+            onClick={() => {
+              setNetworkModalType('following');
+              setNetworkModalOpen(true);
+            }}
+          >
             <Typography variant="subtitle1" fontWeight="bold">{profileUser.following?.length || 0}</Typography>
             <Typography variant="body2" color="text.secondary">Following</Typography>
           </Box>
           <Box sx={{ width: '1px', bgcolor: '#eee' }} />
-          <Box textAlign="center">
+          <Box 
+            textAlign="center" 
+            sx={{ cursor: 'pointer', '&:hover': { opacity: 0.8 } }}
+            onClick={() => {
+              setNetworkModalType('followers');
+              setNetworkModalOpen(true);
+            }}
+          >
             <Typography variant="subtitle1" fontWeight="bold">{profileUser.followers?.length || 0}</Typography>
             <Typography variant="body2" color="text.secondary">Followers</Typography>
           </Box>
         </Box>
+
+        {/* Network Modal */}
+        <Dialog open={networkModalOpen} onClose={() => setNetworkModalOpen(false)} fullWidth maxWidth="xs">
+          <DialogTitle sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            {networkModalType === 'followers' ? 'Followers' : 'Following'}
+            <IconButton onClick={() => setNetworkModalOpen(false)} size="small">
+              <CloseIcon />
+            </IconButton>
+          </DialogTitle>
+          <DialogContent dividers sx={{ p: 0 }}>
+            <List sx={{ width: '100%', p: 0 }}>
+              {(networkModalType === 'followers' ? profileUser.followers : profileUser.following)?.map((u) => (
+                <ListItem 
+                  key={u._id} 
+                  button 
+                  onClick={() => {
+                    setNetworkModalOpen(false);
+                    navigate(`/profile/${u._id}`);
+                  }}
+                >
+                  <ListItemAvatar>
+                    <Avatar src={u.profilePicture ? `${import.meta.env.VITE_API_URL || 'http://localhost:5000'}${u.profilePicture}` : ''}>
+                      {u.username?.charAt(0).toUpperCase()}
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={u.username} secondary={`@${u.handle}`} />
+                </ListItem>
+              ))}
+              {(networkModalType === 'followers' ? profileUser.followers : profileUser.following)?.length === 0 && (
+                <Typography textAlign="center" color="text.secondary" sx={{ p: 3 }}>
+                  No {networkModalType} yet.
+                </Typography>
+              )}
+            </List>
+          </DialogContent>
+        </Dialog>
 
         {/* Milestone */}
         <Box sx={{ mt: 3, mb: 2 }}>
