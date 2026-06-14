@@ -203,7 +203,7 @@ const PostCard = ({ post, onLikeToggle }) => {
 
         {/* Poll Rendering */}
         {pollData && pollData.options && pollData.options.length > 0 && (
-          <Box sx={{ mt: 2, mb: 1, p: 2, borderRadius: '16px', border: '1px solid #e0e0e0', bgcolor: '#fafafa' }}>
+          <Box sx={{ mt: 2, mb: 1, p: 2, borderRadius: '16px', border: '1px solid', borderColor: 'divider', bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(255, 255, 255, 0.03)' : '#fafafa' }}>
             {pollData.question && (
               <Typography variant="subtitle1" fontWeight="bold" sx={{ mb: 2 }}>{pollData.question}</Typography>
             )}
@@ -223,10 +223,10 @@ const PostCard = ({ post, onLikeToggle }) => {
                         position: 'absolute', 
                         top: 0, left: 0, bottom: 0, 
                         width: `${percentage}%`, 
-                        bgcolor: isUserChoice ? 'primary.light' : '#e0e0e0', 
+                        bgcolor: isUserChoice ? 'primary.main' : (theme => theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.1)' : '#e0e0e0'), 
                         borderRadius: '8px',
                         zIndex: 0,
-                        opacity: isUserChoice ? 0.3 : 0.5,
+                        opacity: isUserChoice ? 0.2 : 0.5,
                         transition: 'width 0.5s ease-out'
                       }} />
                       <Box sx={{ position: 'relative', zIndex: 1, p: 1.5, display: 'flex', justifyContent: 'space-between', border: `2px solid ${isUserChoice ? '#1976d2' : 'transparent'}`, borderRadius: '8px' }}>
@@ -242,7 +242,7 @@ const PostCard = ({ post, onLikeToggle }) => {
                       fullWidth 
                       variant="outlined" 
                       onClick={() => handleVote(i)}
-                      sx={{ mb: 1.5, py: 1, textTransform: 'none', justifyContent: 'flex-start', borderRadius: '8px', color: 'text.primary', borderColor: '#d0d0d0', fontWeight: '500', '&:hover': { borderColor: 'primary.main', bgcolor: 'primary.50' } }}
+                      sx={{ mb: 1.5, py: 1, textTransform: 'none', justifyContent: 'flex-start', borderRadius: '8px', color: 'text.primary', borderColor: 'divider', fontWeight: '500', '&:hover': { borderColor: 'primary.main', bgcolor: theme => theme.palette.mode === 'dark' ? 'rgba(25, 118, 210, 0.12)' : 'primary.50' } }}
                     >
                       {opt.text}
                     </Button>
