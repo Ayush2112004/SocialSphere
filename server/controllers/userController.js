@@ -26,7 +26,10 @@ exports.updateProfilePicture = async (req, res) => {
       req.user.id,
       { profilePicture: imageUrl },
       { new: true }
-    ).select('-password');
+    )
+    .populate('followers', 'username handle profilePicture hasBadge')
+    .populate('following', 'username handle profilePicture hasBadge')
+    .select('-password');
     
     res.json(user);
   } catch (error) {
@@ -45,7 +48,10 @@ exports.updateCoverPhoto = async (req, res) => {
       req.user.id,
       { coverPhoto: imageUrl },
       { new: true }
-    ).select('-password');
+    )
+    .populate('followers', 'username handle profilePicture hasBadge')
+    .populate('following', 'username handle profilePicture hasBadge')
+    .select('-password');
     
     res.json(user);
   } catch (error) {
